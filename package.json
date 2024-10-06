@@ -2,12 +2,14 @@
   "name": "",
   "type": "module",
   "version": "0.0.1",
+  "homepage": "https://1thomasalan.github.io/TheAIBLUF",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.7",
