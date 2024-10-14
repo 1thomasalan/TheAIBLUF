@@ -1,0 +1,83 @@
+---
+---
+
+<div id="mobile-menu" class="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 hidden transition-opacity duration-300 opacity-0">
+  <div class="fixed inset-y-0 right-0 w-full max-w-sm bg-background p-6 shadow-lg transform translate-x-full transition-transform duration-300">
+    <nav class="flex flex-col space-y-4">
+      <a href="/" class="text-lg font-medium hover:text-primary transition-colors duration-200">Home</a>
+      <a href="/about" class="text-lg font-medium hover:text-primary transition-colors duration-200">About</a>
+      <a href="/blog" class="text-lg font-medium hover:text-primary transition-colors duration-200">Blog</a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuContent = mobileMenu.querySelector('div');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+
+    function openMobileMenu() {
+      mobileMenu.classList.remove('hidden');
+      setTimeout(() => {
+        mobileMenu.classList.remove('opacity-0');
+        mobileMenuContent.classList.remove('translate-x-full');
+      }, 10);
+      trapFocus(mobileMenuContent);
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.add('opacity-0');
+      mobileMenuContent.classList.add('translate-x-full');
+      setTimeout(() => {
+        mobileMenu.classList.add('hidden');
+      }, 300);
+      removeTrapFocus();
+    }
+
+    mobileMenuToggle.addEventListener('click', (event) => {
+      event.stopPropagation(); // Stop event propagation
+      if (mobileMenu.classList.contains('hidden')) {
+        openMobileMenu();
+      } else {
+        closeMobileMenu();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileMenuContent.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        closeMobileMenu();
+      }
+    });
+
+    function trapFocus(element) {
+      const focusableElements = element.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
+      const firstFocusableElement = focusableElements[0];
+      const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+      element.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey && document.activeElement === firstFocusableElement) {
+            e.preventDefault();
+            lastFocusableElement.focus();
+          } else if (!e.shiftKey && document.activeElement === lastFocusableElement) {
+            e.preventDefault();
+            firstFocusableElement.focus();
+          }
+        }
+      });
+
+      firstFocusableElement.focus();
+    }
+
+    function removeTrapFocus() {
+      mobileMenuToggle.focus();
+    }
+  });
+</script>

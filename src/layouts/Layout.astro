@@ -1,0 +1,35 @@
+---
+import '@/styles/globals.css'
+import { ViewTransitions } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="The AI BLUF - Bottom Line Up Front" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/images/AI-BLUF-Logo-Clear.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<ViewTransitions />
+	</head>
+	<body class="flex flex-col min-h-screen bg-background text-foreground">
+		<Header />
+		<main class="flex-grow container mx-auto px-4 py-8 mt-16">
+			<div class="flex justify-center mb-4">
+				<img src="/images/AI-BLUF-Logo-Clear.png" alt="The AI BLUF Logo" width="200" height="auto" class="h-auto" />
+			</div>
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

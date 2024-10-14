@@ -1,29 +1,56 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Layout from '../layouts/Layout.astro';
+import BlogPostCard from '@/components/BlogPostCard.astro';
+
+const posts = [
+  { 
+    title: "The Future of AI", 
+    date: "2023-10-15", 
+    tags: ["AI", "Technology"], 
+    slug: "future-of-ai",
+    excerpt: "Explore the cutting-edge developments shaping the future of artificial intelligence and its potential impact on various industries."
+  },
+  { 
+    title: "Machine Learning Basics", 
+    date: "2023-10-12", 
+    tags: ["Machine Learning", "Beginner"], 
+    slug: "machine-learning-basics",
+    excerpt: "Dive into the fundamental concepts of machine learning, including key algorithms and their applications in real-world scenarios."
+  },
+  { 
+    title: "Ethics in AI Development", 
+    date: "2023-10-09", 
+    tags: ["AI", "Ethics"], 
+    slug: "ethics-in-ai-development",
+    excerpt: "Examine the crucial ethical considerations in AI development, including bias, privacy, and the societal impact of artificial intelligence."
+  },
+  { 
+    title: "Natural Language Processing Advancements", 
+    date: "2023-10-06", 
+    tags: ["NLP", "AI"], 
+    slug: "nlp-advancements",
+    excerpt: "Discover the latest breakthroughs in Natural Language Processing and how they're revolutionizing human-computer interaction."
+  },
+  { 
+    title: "AI in Healthcare", 
+    date: "2023-10-03", 
+    tags: ["AI", "Healthcare"], 
+    slug: "ai-in-healthcare",
+    excerpt: "Explore how artificial intelligence is transforming the healthcare industry, from diagnosis to treatment and patient care."
+  }
+];
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<!-- Logo -->
-  <img src="/TheAIBLUF/The-AI-BLUF.jpg" alt="Logo" class="logo" />
-			
-			<p>
-				Stay ahead with quick, actionable AI insights and tools that streamline decision-making, reduce time to market, and increase quality. Each post provides essential takeaways so you can make informed, impactful decisions without wasting time.
-			</p>
-			<p>
-				We cut through the noise, delivering AI insights and tools designed for busy executives. Get the Bottom Line Up Front (BLUF) and start making better decisions faster.
-			</p>
-			
-		</main>
-		<Footer />
-	</body>
-</html>
+<Layout title="The AI BLUF - Bottom Line Up Front">
+  <section class="py-0 text-center">
+    <p class="text-lg text-muted-foreground mb-2">AI insights, simplified. Bottom Line Up Front.</p>
+  </section>
+
+  <section class="py-6">
+    <div class="space-y-6">
+      {posts.map((post) => (
+        <BlogPostCard {...post} />
+      ))}
+    </div>
+  </section>
+</Layout>
