@@ -1,5 +1,5 @@
 ---
-title: 'I'm The First post'
+title: "I'm The First post"
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Jul 08 2022'
 heroImage: '/TheAIBLUF/blog-placeholder-3.jpg'
